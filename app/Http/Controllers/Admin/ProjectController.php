@@ -53,7 +53,7 @@ class ProjectController extends Controller
         $newProject->fill($formData);
         $newProject->save();
 
-        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
+        return redirect()->route('admin.projects.show', ['project' => $newProject->slug]);
     }
 
     /**
@@ -102,7 +102,7 @@ class ProjectController extends Controller
         $formData['slug'] = Str::slug($formData['name'], '-');
         $project->update($formData);
 
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+        return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }
 
     /**
