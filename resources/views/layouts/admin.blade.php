@@ -59,6 +59,12 @@
                                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Projects
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.projects.create') }}">
+                                    <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Create new Project
+                                </a>
+                            </li>
                         </ul>
 
 
