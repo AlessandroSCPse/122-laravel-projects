@@ -23,6 +23,12 @@
         <strong>Update at</strong>: {{ $project->updated_at }}
     </div>
 
+    @if ($project->cover_image)
+        <div>
+            <img src="{{ asset('storage/' . $project->cover_image) }}" alt="{{ $project->name }}">
+        </div>
+    @endif
+
     <div class="mt-4">
         <strong>Summary</strong>
 
