@@ -41,6 +41,16 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label" for="type_id">Type</label>
+            <select class="form-select" id="type_id" name="type_id">
+                <option value="">Select a type</option>
+                @foreach ($types as $type)
+                    <option @selected($type->id == old('type_id', $project->type_id)) value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="summary" class="form-label">Summary</label>
             <textarea class="form-control" id="summary" name="summary" rows="10">{{ old('summary', $project->summary) }}</textarea>
         </div>

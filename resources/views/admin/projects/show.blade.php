@@ -12,6 +12,10 @@
     </div>
 
     <div>
+        <strong>Type</strong>: {{ $project->type ? $project->type->name : 'none' }}
+    </div>
+
+    <div>
         <strong>Client name</strong>: {{ $project->client_name ? $project->client_name : 'empty' }}
     </div>
 
