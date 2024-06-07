@@ -96,8 +96,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -119,11 +120,12 @@ class ProjectController extends Controller
             'client_name' => 'nullable|min:5',
             'summary' => 'nullable|min:20',
             'cover_image' => 'nullable|image|max:256',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ]);
         
         $formData = $request->all();
-
+        
         if($request->hasFile('cover_image')) {
             // Se c'è l'immagine vecchia la cancello dalla cartella
             if($project->cover_image) {
@@ -138,6 +140,13 @@ class ProjectController extends Controller
 
         $formData['slug'] = Str::slug($formData['name'], '-');
         $project->update($formData);
+
+        // technologies management
+        if($request->has('technologies')) {
+            $project->technologies()->sync($formData['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }

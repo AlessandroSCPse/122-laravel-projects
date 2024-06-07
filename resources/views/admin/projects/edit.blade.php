@@ -51,6 +51,26 @@
         </div>
 
         <div class="mb-3">
+            <h5>Technologies</h5>
+
+            @foreach ($technologies as $technology)
+                <div class="form-check">
+                    @if ($errors->any())
+                    {{-- Se ci sono errori in pagina, allora voglio prepopolare le checkbox utilizzando old --}}
+                    <input class="form-check-input" @checked(in_array($technology->id, old('technologies', []))) name="technologies[]" type="checkbox" value="{{ $technology->id }}" id="technology-{{ $technology->id }}">
+                    @else
+                    {{-- Se non ci sono errori, l'utente sta caricando la pagina da zero allora voglio prepopolare le checkbox utilizzando il contains della collection --}}
+                    <input class="form-check-input" @checked($project->technologies->contains($technology)) name="technologies[]" type="checkbox" value="{{ $technology->id }}" id="technology-{{ $technology->id }}">
+                    @endif
+        
+                    <label class="form-check-label" for="technology-{{ $technology->id }}">
+                        {{ $technology->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="mb-3">
             <label for="summary" class="form-label">Summary</label>
             <textarea class="form-control" id="summary" name="summary" rows="10">{{ old('summary', $project->summary) }}</textarea>
         </div>
