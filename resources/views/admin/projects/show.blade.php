@@ -16,6 +16,17 @@
     </div>
 
     <div>
+        <strong>Technologies</strong>:
+        @if (count($project->technologies) > 0)
+             @foreach ($project->technologies as $technology)
+                 {{ $technology->name }}
+             @endforeach
+        @else
+            No technology assigned yet
+        @endif
+    </div>
+
+    <div>
         <strong>Client name</strong>: {{ $project->client_name ? $project->client_name : 'empty' }}
     </div>
 
