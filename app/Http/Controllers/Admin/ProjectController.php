@@ -83,7 +83,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {
+    {   
         return view('admin.projects.show', compact('project'));
     }
 
