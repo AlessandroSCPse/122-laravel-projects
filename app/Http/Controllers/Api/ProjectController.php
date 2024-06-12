@@ -11,11 +11,28 @@ class ProjectController extends Controller
     public function index() {
         $projects = Project::with('type', 'technologies')->get();
 
-        // dd($projects);
-
         return response()->json([
             'success' => true,
             'results' => $projects
         ]);
+    }
+
+    public function show($slug) {
+        $project = Project::where('slug', '=', $slug)->with('type', 'technologies')->first();
+
+        $apiData = [];
+        if($project) {
+            $apiData = [
+                'success' => true,
+                'project' => $project
+            ];
+        } else {
+            $apiData = [
+                'success' => false,
+                'error' => 'no project found with this slug'
+            ];
+        }
+
+        return response()->json($apiData);
     }
 }
